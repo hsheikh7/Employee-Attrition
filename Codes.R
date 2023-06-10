@@ -5,16 +5,14 @@ library(tidyquant)
 library(readxl)
 library(skimr)
 library(GGally)
-#Read Data 
 
- 
- # Load data
- employee_attrition_tbl <- read_csv("data/datasets-1067-1925-WA_Fn-UseC_-HR-Employee-Attrition.txt")
- definitions_raw_tbl <- read_excel('data/data_definitions.xlsx', sheet = 1, col_names = FALSE)
- 
- definitions_raw_tbl
- 
- glimpse(employee_attrition_tbl)
+# Load data
+employee_attrition_tbl <- read_csv("data/datasets-1067-1925-WA_Fn-UseC_-HR-Employee-Attrition.txt")
+definitions_raw_tbl <- read_excel('data/data_definitions.xlsx', sheet = 1, col_names = FALSE)
+
+definitions_raw_tbl
+
+glimpse(employee_attrition_tbl)
  
  # Exploratory Data Analysis (EDA) 
  
@@ -100,45 +98,28 @@ employee_attrition_tbl %>%
  
 # 1. Compensation Features
 # Question: What can you deduce about the interaction between Monthly Income and Attrition?
-# Those that are leaving the company have a higher Monthly Income
-# That those are staying have a lower Monthly Income
-# Those that are leaving have a lower Monthly Income
-# It's difficult to deduce anything based on the visualization
- employee_attrition_tbl %>%
+
+employee_attrition_tbl %>%
   select(Attrition, contains("income"), contains("rate"), contains("salary"), contains("stock")) %>%
   plot_ggpairs(Attrition)
 
-
+employee_attrition_tbl %>% select(DailyRate, HourlyRate, MonthlyIncome, MonthlyRate, PercentSalaryHike, StockOptionLevel)
+ 
 # 2. Compensation Features
 # Question: What can you deduce about the interaction between Percent Salary Hike and Attrition?
-# Those that are leaving the company have a higher Percent Salary Hike
-# Those that are staying have a lower Percent Salary Hike
-# Those that are leaving have lower Percent Salary Hike
-# It's difficult to deduce anything based on the visualization
 
 # 3. Compensation Features
 # Question: What can you deduce about the interaction between Stock Option Level and Attrition?
-# Those that are leaving the company have a higher stock option level
-# Those that are staying have a higher stock option level
-# It's difficult to deduce anything based on the visualization
+
  employee_attrition_tbl %>%
   select(Attrition, contains("income"), contains("rate"), contains("salary"), contains("stock")) %>%
   plot_ggpairs(Attrition)
  
 #4. Survey Results
 # Question: What can you deduce about the interaction between Environment Satisfaction and Attrition?
-# A higher proportion of those leaving have a low environment satisfaction level
-# A higher proportion of those leaving have a high environment satisfaction level
-# It's difficult to deduce anything based on the visualization
-
-
 
 # 5. Survey Results
 # Question: What can you deduce about the interaction between Work Life Balance and Attrition
-# Those that are leaving have higher density of 2's and 3's
-# Those that are staying have a higher density of 2's and 3's
-# Those that are staying have a lower density of 2's and 3's
-# It's difficult to deduce anything based on the visualization
 
  employee_attrition_tbl %>%
   select(Attrition, contains("satisfaction"), contains("life")) %>%
@@ -147,10 +128,6 @@ employee_attrition_tbl %>%
 
 # 6. Performance Data
 # Question: What Can you deduce about the interaction between Job Involvement and Attrition?
-# Those that are leaving have a lower density of 3's and 4's
-# Those that are leaving have a lower density of 1's and 2's
-# Those that are staying have a lower density of 2's and 3's
-# It's difficult to deduce anything based on the visualization
 
  employee_attrition_tbl %>%
   select(Attrition, contains("performance"), contains("involvement")) %>%
@@ -158,8 +135,6 @@ employee_attrition_tbl %>%
 
 # 7. Work-Life Features
 # Question: What can you deduce about the interaction between Over Time and Attrition?
-#The proportion of those leaving that are working Over Time are high compared to those that are not leaving
-# The proportion of those staying that are working Over Time are high compared to those that are not staying
 
  employee_attrition_tbl %>%
   select(Attrition, contains("overtime"), contains("travel")) %>%
@@ -167,9 +142,6 @@ employee_attrition_tbl %>%
 
 # 8. Training and Education
 # Question: What can you deduce about the interaction between Training Times Last Year and Attrition
-# People that leave tend to have more annual trainings
-# People that leave tend to have less annual trainings
-# It's difficult to deduce anything based on the visualization
 
  employee_attrition_tbl %>%
   select(Attrition, contains("training"), contains("education")) %>%
@@ -177,21 +149,13 @@ employee_attrition_tbl %>%
 
 # 9. Time-Based Features
 # Question: What can you deduce about the interaction between Years At Company and Attrition
-# People that leave tend to have more working years at the company
-# People that leave tend to have less working years at the company
-# It's difficult to deduce anything based on the visualization
 
-#   8. Time-Based Features: Years at company, years in current role
+# 8. Time-Based Features: Years at company, years in current role
  employee_attrition_tbl %>%
   select(Attrition, contains("years")) %>%
   plot_ggpairs(Attrition)
 
 # 10. Time-Based Features
 # Question: What can you deduce about the interaction between Years Since Last Promotion and Attrition?
-#   Those that are leaving have more years since last promotion than those that are staying
-# Those that are leaving have fewer years since last promotion than those that are staying
-# It's difficult to deduce anything based on the visualization
- 
- 
- 
+
  
